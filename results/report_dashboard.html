@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Risk & Engagement Prediction - Units 1-5 Benchmark</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f7fafc;
+            color: #2d3748;
+            margin: 0;
+            padding: 24px;
+        }
+        .container { max-width: 1250px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .header h1 { margin: 0 0 8px 0; font-size: 26px; }
+        .header p { margin: 0; opacity: 0.9; font-size: 14px; }
+        .champion-banner {
+            background: #ebf8ff;
+            border: 2px solid #3182ce;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .champion-badge {
+            background: #3182ce;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .unit-tag {
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .status-tag {
+            background: #feebc8;
+            color: #7b341e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+        }
+        .card h3 { margin-top: 0; font-size: 17px; color: #1a202c; border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #4a5568;
+            padding: 10px 8px;
+            font-weight: 600;
+            border-bottom: 2px solid #cbd5e0;
+        }
+        td {
+            padding: 9px 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        tr:hover { background-color: #f8fafc; }
+        .champion-row {
+            background-color: #ebf8ff !important;
+            font-weight: 500;
+        }
+        .stat-box {
+            display: inline-block;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            min-width: 120px;
+        }
+        .stat-label { font-size: 10px; color: #718096; text-transform: uppercase; font-weight: 600; }
+        .stat-val { font-size: 20px; font-weight: bold; color: #2d3748; margin-top: 2px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Academic Risk & Engagement Prediction System</h1>
+            <p>Syllabus Units 1 to 5: Polynomial Curve Fitting | Bayesian Logistic Regression & SVM | Clustering & PCA | HMM & Viterbi | CART & Ensembles</p>
+        </div>
+
+        <div class="champion-banner">
+            <div>
+                <span class="champion-badge">WINNING ALGORITHM</span>
+                <h2 style="margin: 8px 0 4px 0; color: #2b6cb0;">Bayesian Logistic Regression (Unit 2)</h2>
+                <p style="margin: 0; color: #4a5568; font-size: 13px;">
+                    Attained <strong>96.67% Accuracy</strong>, 
+                    <strong>92.66% Sensitivity</strong>, and <strong>99.76% ROC-AUC</strong> 
+                    across 5-Fold Stratified Cross-Validation.
+                </p>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 34px; font-weight: bold; color: #2b6cb0;">99.8%</div>
+                <div style="font-size: 11px; color: #718096; font-weight: bold;">TEST ROC-AUC</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Requirement 2 & 4: Master Algorithm Leaderboard (Units 2, 4, 5 Classification)</h3>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Unit</th>
+                            <th>Algorithm</th>
+                            <th>Accuracy</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>F1-Score</th>
+                            <th>ROC-AUC</th>
+                            <th>5-Fold CV ROC</th>
+                            <th>False Neg. Rate</th>
+                            <th>Train Latency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+        <tr class="champion-row">
+            <td><strong>#1</strong></td>
+            <td><span class="unit-tag">Unit 2</span></td>
+            <td><strong><span class="badge champion-badge">CHAMPION</span> Bayesian Logistic Regression</strong></td>
+            <td>96.67%</td>
+            <td>98.06%</td>
+            <td>92.66%</td>
+            <td><strong>95.28%</strong></td>
+            <td><strong>99.76%</strong></td>
+            <td>99.50%</td>
+            <td>7.34%</td>
+            <td>4.9 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#2</strong></td>
+            <td><span class="unit-tag">Unit 2</span></td>
+            <td><strong>SVM (Linear Kernel)</strong></td>
+            <td>96.67%</td>
+            <td>98.06%</td>
+            <td>92.66%</td>
+            <td><strong>95.28%</strong></td>
+            <td><strong>99.73%</strong></td>
+            <td>99.49%</td>
+            <td>7.34%</td>
+            <td>35.3 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#3</strong></td>
+            <td><span class="unit-tag">Unit 2</span></td>
+            <td><strong>SVM (RBF Kernel)</strong></td>
+            <td>96.33%</td>
+            <td>97.12%</td>
+            <td>92.66%</td>
+            <td><strong>94.84%</strong></td>
+            <td><strong>99.63%</strong></td>
+            <td>99.32%</td>
+            <td>7.34%</td>
+            <td>39.9 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#4</strong></td>
+            <td><span class="unit-tag">Unit 5</span></td>
+            <td><strong>Random Forest</strong></td>
+            <td>96.00%</td>
+            <td>96.19%</td>
+            <td>92.66%</td>
+            <td><strong>94.39%</strong></td>
+            <td><strong>99.51%</strong></td>
+            <td>99.01%</td>
+            <td>7.34%</td>
+            <td>224.6 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#5</strong></td>
+            <td><span class="unit-tag">Unit 5</span></td>
+            <td><strong>AdaBoost</strong></td>
+            <td>95.67%</td>
+            <td>95.28%</td>
+            <td>92.66%</td>
+            <td><strong>93.95%</strong></td>
+            <td><strong>99.54%</strong></td>
+            <td>99.24%</td>
+            <td>7.34%</td>
+            <td>256.6 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#6</strong></td>
+            <td><span class="unit-tag">Unit 2</span></td>
+            <td><strong>SVM (Poly Kernel)</strong></td>
+            <td>95.67%</td>
+            <td>100.00%</td>
+            <td>88.07%</td>
+            <td><strong>93.66%</strong></td>
+            <td><strong>99.66%</strong></td>
+            <td>99.21%</td>
+            <td>11.93%</td>
+            <td>37.9 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#7</strong></td>
+            <td><span class="unit-tag">Unit 5</span></td>
+            <td><strong>XGBoost</strong></td>
+            <td>95.67%</td>
+            <td>96.15%</td>
+            <td>91.74%</td>
+            <td><strong>93.90%</strong></td>
+            <td><strong>99.52%</strong></td>
+            <td>99.00%</td>
+            <td>8.26%</td>
+            <td>59.1 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#8</strong></td>
+            <td><span class="unit-tag">Unit 5</span></td>
+            <td><strong>Gradient Boosting</strong></td>
+            <td>95.67%</td>
+            <td>96.15%</td>
+            <td>91.74%</td>
+            <td><strong>93.90%</strong></td>
+            <td><strong>99.37%</strong></td>
+            <td>98.93%</td>
+            <td>8.26%</td>
+            <td>286.4 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#9</strong></td>
+            <td><span class="unit-tag">Unit 5</span></td>
+            <td><strong>Voting Classifier</strong></td>
+            <td>95.33%</td>
+            <td>93.58%</td>
+            <td>93.58%</td>
+            <td><strong>93.58%</strong></td>
+            <td><strong>99.56%</strong></td>
+            <td>98.87%</td>
+            <td>6.42%</td>
+            <td>223.3 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#10</strong></td>
+            <td><span class="unit-tag">Unit 5</span></td>
+            <td><strong>CART (Gini Impurity)</strong></td>
+            <td>94.00%</td>
+            <td>90.27%</td>
+            <td>93.58%</td>
+            <td><strong>91.89%</strong></td>
+            <td><strong>96.26%</strong></td>
+            <td>94.87%</td>
+            <td>6.42%</td>
+            <td>2.9 ms</td>
+        </tr>
+        
+        <tr >
+            <td><strong>#11</strong></td>
+            <td><span class="unit-tag">Unit 5</span></td>
+            <td><strong>CART (Entropy)</strong></td>
+            <td>94.33%</td>
+            <td>95.10%</td>
+            <td>88.99%</td>
+            <td><strong>91.94%</strong></td>
+            <td><strong>95.58%</strong></td>
+            <td>95.51%</td>
+            <td>11.01%</td>
+            <td>3.0 ms</td>
+        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                <img src="algorithm_comparison.png" alt="Algorithm Comparison Chart" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Unit 1: Polynomial Curve Fitting (Bishop PRML Ch. 1)</h3>
+            <p style="font-size: 13px; color: #718096;">
+                Analysis of polynomial degree M, Root-Mean-Square Error (E_RMS), weight vector norm ||w||, and regularization (weight decay lambda):
+            </p>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Degree M</th>
+                            <th>Reg. Lambda</th>
+                            <th>Train E_RMS</th>
+                            <th>Test E_RMS</th>
+                            <th>Test R²</th>
+                            <th>Weight Norm ||w||</th>
+                            <th>Empirical Diagnosis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+        <tr>
+            <td><strong>M = 1</strong></td>
+            <td>0.0</td>
+            <td>9.4038</td>
+            <td>9.2829</td>
+            <td>0.7123</td>
+            <td>80.83</td>
+            <td><span class="status-tag">Underfitting</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>M = 2</strong></td>
+            <td>0.0</td>
+            <td>8.9795</td>
+            <td>8.9969</td>
+            <td>0.7298</td>
+            <td>157.44</td>
+            <td><span class="status-tag">Optimal Fit</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>M = 3</strong></td>
+            <td>0.0</td>
+            <td>8.9217</td>
+            <td>8.9825</td>
+            <td>0.7306</td>
+            <td>138.48</td>
+            <td><span class="status-tag">Optimal Fit</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>M = 5</strong></td>
+            <td>0.0</td>
+            <td>8.9216</td>
+            <td>8.9785</td>
+            <td>0.7309</td>
+            <td>160.73</td>
+            <td><span class="status-tag">Overfitting</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>M = 9</strong></td>
+            <td>0.0</td>
+            <td>8.9164</td>
+            <td>8.9954</td>
+            <td>0.7299</td>
+            <td>811796.28</td>
+            <td><span class="status-tag">Overfitting</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>M = 9</strong></td>
+            <td>0.0001</td>
+            <td>8.9211</td>
+            <td>8.9820</td>
+            <td>0.7307</td>
+            <td>209.53</td>
+            <td><span class="status-tag">Regularized (Controlled Overfit, ln lambda=-9.2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>M = 9</strong></td>
+            <td>0.01</td>
+            <td>8.9218</td>
+            <td>8.9769</td>
+            <td>0.7310</td>
+            <td>101.76</td>
+            <td><span class="status-tag">Regularized (Controlled Overfit, ln lambda=-4.6)</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>M = 9</strong></td>
+            <td>1.0</td>
+            <td>8.9903</td>
+            <td>9.0229</td>
+            <td>0.7282</td>
+            <td>80.14</td>
+            <td><span class="status-tag">Regularized (Controlled Overfit, ln lambda=0.0)</span></td>
+        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                <img src="polynomial_curve_fitting.png" alt="Polynomial Curve Fitting Graph" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Error Analysis: Confusion Matrices Across Key Models</h3>
+            <div style="margin-top: 10px; text-align: center;">
+                <img src="confusion_matrices.png" alt="Confusion Matrices" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>Unit 4: HMM & Viterbi Dynamic Decoding</h3>
+                <div class="stat-box">
+                    <div class="stat-label">Sequence Accuracy</div>
+                    <div class="stat-val">83.1%</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Viterbi Recall</div>
+                    <div class="stat-val">67.8%</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Viterbi F1</div>
+                    <div class="stat-val">74.6%</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Avg Alert Week</div>
+                    <div class="stat-val">Week 4.68</div>
+                </div>
+                <div style="margin-top: 15px; text-align: center;">
+                    <img src="viterbi_trajectories.png" alt="Viterbi Weekly Trajectories" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0;">
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Unit 5: Feature Relevance Ranking (CART & Ensembles)</h3>
+                <div style="margin-top: 10px; text-align: center;">
+                    <img src="feature_importance.png" alt="Feature Importance Ranking" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0;">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Unit 3: K-Means Student Persona Profiling (Unsupervised Discovery & PCA)</h3>
+            <p style="font-size: 13px; color: #718096; margin-bottom: 16px;">
+                PCA retains <strong>71.2%</strong> of total multi-attribute variance in 2D. K-Means segments the cohort into 3 tiers:
+            </p>
+            <div style="margin-top: 10px; margin-bottom: 20px; text-align: center;">
+                <img src="pca_clusters.png" alt="PCA Clusters" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0;">
+            </div>
+            <div class="grid-3">
+                
+        <div class="card" style="border-top: 4px solid #2f855a;">
+            <h4 style="color: #2f855a; margin-top:0;">Tier 1: High Engagement / Low Risk</h4>
+            <div style="font-size: 13px; color: #4a5568;">
+                <p><strong>Avg GPA:</strong> 3.49</p>
+                <p><strong>Avg Attendance:</strong> 90.25%</p>
+                <p><strong>Avg Assignments:</strong> 9.47/10</p>
+                <p><strong>Online LMS Hours:</strong> 24.51 hrs/wk</p>
+                <p><strong>Actual At-Risk Rate:</strong> <span style="font-size:16px; font-weight:bold; color:#2f855a;">0.0%</span></p>
+            </div>
+        </div>
+        
+        <div class="card" style="border-top: 4px solid #dd6b20;">
+            <h4 style="color: #dd6b20; margin-top:0;">Tier 2: Moderate Engagement / Warning Zone</h4>
+            <div style="font-size: 13px; color: #4a5568;">
+                <p><strong>Avg GPA:</strong> 2.88</p>
+                <p><strong>Avg Attendance:</strong> 76.83%</p>
+                <p><strong>Avg Assignments:</strong> 7.15/10</p>
+                <p><strong>Online LMS Hours:</strong> 18.37 hrs/wk</p>
+                <p><strong>Actual At-Risk Rate:</strong> <span style="font-size:16px; font-weight:bold; color:#dd6b20;">24.52%</span></p>
+            </div>
+        </div>
+        
+        <div class="card" style="border-top: 4px solid #e53e3e;">
+            <h4 style="color: #e53e3e; margin-top:0;">Tier 3: Severe Disengagement / Critical Risk</h4>
+            <div style="font-size: 13px; color: #4a5568;">
+                <p><strong>Avg GPA:</strong> 2.26</p>
+                <p><strong>Avg Attendance:</strong> 62.68%</p>
+                <p><strong>Avg Assignments:</strong> 4.25/10</p>
+                <p><strong>Online LMS Hours:</strong> 12.03 hrs/wk</p>
+                <p><strong>Actual At-Risk Rate:</strong> <span style="font-size:16px; font-weight:bold; color:#e53e3e;">99.68%</span></p>
+            </div>
+        </div>
+        
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    

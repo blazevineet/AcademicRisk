@@ -1,0 +1,29 @@
+{
+    "0": {
+        "GPA": 2.88,
+        "Attendance_Rate": 76.83,
+        "Assignments_Submitted": 7.15,
+        "Online_Learning_Hours": 18.37,
+        "Forum_Participation": 10.42,
+        "Lab_Performance": 77.19,
+        "At_Risk_Rate": 24.52
+    },
+    "1": {
+        "GPA": 2.26,
+        "Attendance_Rate": 62.68,
+        "Assignments_Submitted": 4.25,
+        "Online_Learning_Hours": 12.03,
+        "Forum_Participation": 4.85,
+        "Lab_Performance": 62.92,
+        "At_Risk_Rate": 99.68
+    },
+    "2": {
+        "GPA": 3.49,
+        "Attendance_Rate": 90.25,
+        "Assignments_Submitted": 9.47,
+        "Online_Learning_Hours": 24.51,
+        "Forum_Participation": 15.96,
+        "Lab_Performance": 90.46,
+        "At_Risk_Rate": 0.0
+    }
+}
