@@ -45,8 +45,8 @@ def generate_intervention_plan(student: dict, risk_prob: float, earliest_risk_we
         actions.append(f"[ATTENDANCE DEFICIT] Attendance is {student['Attendance_Rate']}%. Enforce mandatory check-ins and lecture capture review.")
     if student['Assignments_Submitted'] < 7:
         actions.append(f"[COURSEWORK DEFICIT] Only {student['Assignments_Submitted']}/10 assignments completed. Offer assignment clinic and tutoring.")
-    if student['GPA'] < 2.5:
-        actions.append(f"[GRADE MONITORING] Cumulative GPA is {student['GPA']}. Recommend peer tutoring and remedial study groups.")
+    if student['GPA'] < 6.0:
+        actions.append(f"[GRADE MONITORING] Cumulative GPA is {student['GPA']}/10. Recommend peer tutoring and remedial study groups.")
     if student['Online_Learning_Hours'] < 8.0:
         actions.append(f"[LMS DISENGAGEMENT] Only {student['Online_Learning_Hours']} hrs/week active on LMS. Issue portal reminder.")
     if student['Lab_Performance'] < 60.0:
@@ -57,14 +57,30 @@ def generate_intervention_plan(student: dict, risk_prob: float, earliest_risk_we
         
     return actions
 
+def sanitize_student_input(raw: dict) -> dict:
+    """Sanitizes and enforces strict types for inference input."""
+    return {
+        'Age': int(raw.get('Age', 20)),
+        'Gender': str(raw.get('Gender', 'Male')).capitalize().strip(),
+        'Socio_Economic_Status': str(raw.get('Socio_Economic_Status', 'Medium')).capitalize().strip(),
+        'GPA': round(float(raw.get('GPA', 7.5)), 2),
+        'Attendance_Rate': round(float(raw.get('Attendance_Rate', 80.0)), 2),
+        'Assignments_Submitted': int(raw.get('Assignments_Submitted', 8)),
+        'Online_Learning_Hours': round(float(raw.get('Online_Learning_Hours', 15.0)), 2),
+        'Forum_Participation': int(raw.get('Forum_Participation', 10)),
+        'Lab_Performance': round(float(raw.get('Lab_Performance', 75.0)), 2),
+        'Extracurricular_Participation': str(raw.get('Extracurricular_Participation', 'No')).capitalize().strip()
+    }
+
 def predict_student(student_dict: dict):
+    student_dict = sanitize_student_input(student_dict)
     model, preprocessor = load_inference_artifacts()
     df = pd.DataFrame([student_dict])
     X_proc = preprocessor.transform(df)
     
     # 1. Unit 2 Bayesian Predictive Probability & Epistemic Uncertainty
     if hasattr(model, 'predict_proba'):
-        prob = model.predict_proba(X_proc)[0, 1]
+        prob = float(model.predict_proba(X_proc)[0, 1])
     else:
         prob = float(model.predict(X_proc)[0])
         
@@ -99,9 +115,10 @@ def predict_student(student_dict: dict):
     
     return {
         'at_risk_status': 'AT RISK (Intervention Needed)' if is_risk == 1 else 'SAFE (Satisfactory Progress)',
-        'risk_probability': round(prob * 100, 2),
+        'is_at_risk': bool(is_risk == 1),
+        'risk_probability': round(float(prob * 100), 2),
         'epistemic_uncertainty': uncertainty,
-        'engagement_index': engagement_idx,
+        'engagement_index': float(engagement_idx),
         'viterbi_decoded_trajectory': decoded_names,
         'earliest_risk_detected_week': earliest_risk_week if earliest_risk_week > 0 else 'None (Remained in Safe/Warning band)',
         'intervention_plan': actions
@@ -120,7 +137,7 @@ def run_demo():
                 'Age': 21,
                 'Gender': 'Male',
                 'Socio_Economic_Status': 'Low',
-                'GPA': 2.15,
+                'GPA': 5.38,
                 'Attendance_Rate': 58.0,
                 'Assignments_Submitted': 4,
                 'Online_Learning_Hours': 5.2,
@@ -135,7 +152,7 @@ def run_demo():
                 'Age': 20,
                 'Gender': 'Female',
                 'Socio_Economic_Status': 'High',
-                'GPA': 3.85,
+                'GPA': 9.62,
                 'Attendance_Rate': 94.0,
                 'Assignments_Submitted': 10,
                 'Online_Learning_Hours': 22.5,
@@ -150,7 +167,7 @@ def run_demo():
                 'Age': 22,
                 'Gender': 'Male',
                 'Socio_Economic_Status': 'Medium',
-                'GPA': 2.70,
+                'GPA': 6.75,
                 'Attendance_Rate': 72.5,
                 'Assignments_Submitted': 6,
                 'Online_Learning_Hours': 9.0,

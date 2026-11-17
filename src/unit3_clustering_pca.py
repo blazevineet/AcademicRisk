@@ -150,13 +150,13 @@ def plot_unit3_visual(X_pca, km_labels, y_true, sorted_profiles, df_metrics, out
     
     # 4. Bottom Right: Student Persona Centroids Comparison
     ax4 = axes[1, 1]
-    features_to_plot = ['GPA_x25', 'Attendance_%', 'Assignments_x10', 'LMS_Hours']
+    features_to_plot = ['GPA_x10', 'Attendance_%', 'Assignments_x10', 'LMS_Hours']
     x_feat = np.arange(len(features_to_plot))
     w_bar = 0.25
     
     for i, (cid, stats) in enumerate(sorted_profiles):
         norm_vals = [
-            stats['GPA'] * 25.0,  # scale 4 to 100
+            stats['GPA'] * 10.0,  # scale 10 to 100
             stats['Attendance_Rate'],
             stats['Assignments_Submitted'] * 10.0,  # scale 10 to 100
             stats['Online_Learning_Hours'] * 3.0   # scale 35 to ~100

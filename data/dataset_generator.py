@@ -4,7 +4,7 @@ Attributes:
 - Age: int (18-26)
 - Gender: categorical ('Male', 'Female')
 - Socio_Economic_Status: categorical ('Low', 'Medium', 'High')
-- GPA: float (0.00 - 4.00)
+- GPA: float (0.00 - 10.00)
 - Attendance_Rate: float (0.0 - 100.0%)
 - Assignments_Submitted: int (0 - 10)
 - Online_Learning_Hours: float (1.0 - 35.0 hrs/week)
@@ -37,9 +37,9 @@ def generate_academic_risk_dataset(n_samples: int = 1500, random_state: int = 42
     ses_effect = np.where(ses == 'Low', -0.25, np.where(ses == 'High', 0.25, 0.0))
     z_capability = np.random.normal(loc=0.0, scale=1.0, size=n_samples) + ses_effect
     
-    # 4. GPA (Scale 0.0 to 4.0)
-    gpa = 2.95 + 0.52 * z_capability + np.random.normal(0, 0.25, n_samples)
-    gpa = np.clip(np.round(gpa, 2), 1.20, 4.00)
+    # 4. GPA (Scale 0.00 to 10.00)
+    gpa = 7.38 + 1.30 * z_capability + np.random.normal(0, 0.625, n_samples)
+    gpa = np.clip(np.round(gpa, 2), 3.00, 10.00)
     
     # 5. Attendance_Rate (Scale 0.0% to 100.0%)
     # Correlated with capability and discipline
@@ -70,9 +70,9 @@ def generate_academic_risk_dataset(n_samples: int = 1500, random_state: int = 42
     
     # 11. Target Variable: At_Risk (0 = Safe, 1 = At Risk)
     # Realistic educational risk equation:
-    # High risk when: GPA < 2.5, Attendance < 70%, Assignments < 6, Low LMS hours, Low Lab
+    # High risk when: GPA < 6.25, Attendance < 70%, Assignments < 6, Low LMS hours, Low Lab
     z_risk = (
-        -1.85 * (gpa - 2.8)
+        -0.74 * (gpa - 7.00)
         - 0.065 * (attendance - 75.0)
         - 0.42 * (assignments - 7.0)
         - 0.09 * (online_hours - 12.0)
@@ -80,9 +80,9 @@ def generate_academic_risk_dataset(n_samples: int = 1500, random_state: int = 42
         - 0.05 * (forum_posts - 8.0)
         + np.where(ses == 'Low', 0.35, np.where(ses == 'High', -0.25, 0.0))
         + np.where(extracurricular == 'No', 0.20, -0.15)
-        # Non-linear penalty for extreme low attendance (<60%) or low GPA (<2.0)
+        # Non-linear penalty for extreme low attendance (<60%) or low GPA (<5.0)
         + np.where(attendance < 60.0, 1.25, 0.0)
-        + np.where(gpa < 2.0, 1.40, 0.0)
+        + np.where(gpa < 5.0, 1.40, 0.0)
         + np.random.normal(0, 0.55, n_samples)  # Realistic stochastic noise
     )
     

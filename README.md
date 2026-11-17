@@ -18,7 +18,7 @@ The system operates on an academic cohort dataset matching the exact 11 target a
 | `Age` | Numerical (int) | 18 – 26 | Student chronological age |
 | `Gender` | Categorical | `Male`, `Female` | Self-reported gender |
 | `Socio_Economic_Status` | Categorical | `Low`, `Medium`, `High` | Household environmental background |
-| `GPA` | Numerical (float) | 1.20 – 4.00 | Prior academic mastery ($r = -0.7239$) |
+| `GPA` | Numerical (float) | 0.00 – 10.00 | Prior academic mastery ($r = -0.7239$) |
 | `Attendance_Rate` | Numerical (float) | 32.0% – 100.0% | Lecture session attendance ($r = -0.7139$) |
 | `Assignments_Submitted` | Numerical (int) | 0 – 10 | Completed coursework deliverables ($r = -0.7515$) |
 | `Online_Learning_Hours` | Numerical (float) | 1.0 – 35.0 hrs/wk | Weekly LMS interaction duration ($r = -0.6698$) |
@@ -79,13 +79,21 @@ Evaluated on $N=300$ independent held-out students and 5-Fold Stratified Cross-V
 
 ## 4. Execution Commands
 
-1. **Run Full Experiments & Cross-Validation:**
+1. **Launch Interactive Web Prediction Panel & Dashboard:**
+   ```bash
+   python app.py
+   ```
+   * Or simply run: `python open_dashboard.py`
+   * Automatically opens `http://127.0.0.1:5000` in your web browser.
+   * Features real-time sliders, preset profiles (High Hazard, Safe / Dean's List, Borderline), live Bayesian risk calculations, 10-week Viterbi trajectory decoding, and automated pedagogical action plans!
+   * You can also double-click `results/report_dashboard.html` to open it offline in any web browser without needing a server.
+
+2. **Run Full Experiments & Cross-Validation:**
    ```bash
    python run_experiments.py
    ```
-2. **Run Interactive Early Warning Predictor:**
+
+3. **Run Terminal Predictor Demo:**
    ```bash
    python predict.py
    ```
-3. **Open Visual HTML Dashboard:**
-   Open [`results/report_dashboard.html`](results/report_dashboard.html) in any browser.
